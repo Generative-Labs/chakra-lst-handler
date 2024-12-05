@@ -312,7 +312,6 @@ contract LSTHandler is OwnableUpgradeable, UUPSUpgradeable, AccessControlUpgrade
         address from_token = address(uint160(payload.from_token));
         require(payload.amount > 0, "LSTHandler/invalid-unlock-amount");
         require(from_token == token, "LSTHandler/invalid-to-token");
-        // The amount of the mint transaction should be the same as the amount of the burn transaction
 
         // Unlock the token to the sender
         require(IERC20(token).balanceOf(address(this)) >= payload.amount, "LSTHandler/insufficient-balance");
