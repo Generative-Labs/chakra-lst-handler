@@ -14,8 +14,9 @@ import "../interfaces/ICrossChainCodec.sol";
 import "../interfaces/IERC20Mint.sol";
 import "../interfaces/IERC20Burn.sol";
 import "../interfaces/ISettlementSignatureVerifier.sol";
+import "../interfaces/ISettlementHandler.sol";
 
-contract LSTHandler is OwnableUpgradeable, UUPSUpgradeable, AccessControlUpgradeable {
+contract LSTHandler is OwnableUpgradeable, UUPSUpgradeable, AccessControlUpgradeable, ISettlementHandler {
     enum CrossChainTxStatus {
         Unknow,
         Pending,
@@ -316,5 +317,14 @@ contract LSTHandler is OwnableUpgradeable, UUPSUpgradeable, AccessControlUpgrade
         // Unlock the token to the sender
         require(IERC20(token).balanceOf(address(this)) >= payload.amount, "LSTHandler/insufficient-balance");
         IERC20(token).transfer(strategy, payload.amount);
+    }
+
+    /// @dev In this scenario, no callback handling is required
+    function receive_cross_chain_callback(uint256, string memory, uint256, CrossChainMsgStatus, uint8, bytes calldata)
+        external
+        pure
+        returns (bool)
+    {
+        return true;
     }
 }
