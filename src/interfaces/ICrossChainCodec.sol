@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import {SettlementMode} from "../interfaces/ISettlementHandler.sol";
-
 /// @notice The type of cross chain strategy payload
 enum CrossChainPayloadType {
     /// @notice Caller invokes on the source chain, then locks on the source chain, and mints on the target chain

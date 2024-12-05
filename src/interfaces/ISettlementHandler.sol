@@ -3,50 +3,8 @@ pragma solidity ^0.8.0;
 
 import "../libraries/Message.sol";
 
-/// @dev The settlement mode
-/// @custom:field LockMint means the source chain is locked and the destination chain will mint the tokens
-/// @custom:field LockUnlock means the source chain is locked and the destination chain will unlock the tokens
-enum SettlementMode {
-    MintBurn,
-    LockMint,
-    LockUnlock
-}
-
 // Interface for a settlement handler, responsible for processing cross-chain messages
 interface ISettlementHandler {
-    /// @notice Emitted when a cross-chain vault deposit is initiated
-    /// @param txid Unique identifier of the cross-chain transaction
-    /// @param toHandler Address of the handler on the destination chain
-    /// @param toChain Name of the destination chain
-    /// @param asset Address of the asset token in the vault
-    /// @param amount Amount of the asset token in the vault
-    /// @param vault The vault address
-    /// @param to Address to which the vault will be sent in the destination chain
-    /// @param shareReceiver Address of the share receiver from the vault in the destination chain
-    /// @param settlementMode Settlement mode
-    event CrossChainVaultDepositSend(
-        uint256 indexed txid,
-        string indexed toChain,
-        address indexed toHandler,
-        address asset,
-        uint256 amount,
-        address vault,
-        address to,
-        address shareReceiver,
-        SettlementMode settlementMode
-    );
-
-    event CrossChainVaultWithdrawSend(
-        uint256 txid,
-        string indexed toChain,
-        address indexed toHandler,
-        address toToken,
-        uint256 amount,
-        address vault,
-        address to,
-        SettlementMode settlementMode
-    );
-
     // Callback function invoked when a cross-chain message is received
     //
     // @param txid Unique identifier of the cross-chain transaction

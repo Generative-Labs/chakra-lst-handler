@@ -45,7 +45,6 @@ contract CrossChainCodecTest is Test {
     }
 
     function test_cross_chain_burn_unlock_codec() public {
-        uint256 from = uint256(uint160(makeAddr("from")));
         uint256 from_token = uint256(uint160(makeAddr("from_token")));
         uint256 amount = 1000;
         bytes memory encoded = codec.encode_cross_chain_burn_unlock_payload(
